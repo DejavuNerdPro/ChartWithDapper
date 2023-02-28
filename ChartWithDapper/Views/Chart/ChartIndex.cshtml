@@ -1,0 +1,34 @@
+﻿<div id="chart" class="center_chart"></div>
+@section Scripts{ 
+    <script>
+        var options = {
+            series: @(Html.Raw(JsonConvert.SerializeObject(ViewBag.pie_chart.amountList))),
+        chart: {
+            width: 600,
+            type: 'pie',
+        },
+        labels: ['Income', 'Expense'],
+        responsive: [{
+            breakpoint: 480,
+            options: {
+                chart: {
+                    width: 500
+                },
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }],
+        tooltip: {
+            y: {
+                formatter: function (val) {
+                    return "Amount- " + val + " Kyats"
+                }
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+    </script>
+}
